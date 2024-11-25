@@ -2,7 +2,11 @@ const express = require("express");
 
 const { magazines } = require("../Data/books.js").infoBooks;
 const orderby = require("../query/order.js");
+
 const routerMagazine = express.Router();
+
+// Middleware
+routerMagazine.use(express.json());
 
 routerMagazine.get("/", (req, res) => {
   res.send(JSON.stringify(magazines));

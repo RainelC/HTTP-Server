@@ -1,8 +1,13 @@
 const express = require("express");
 
 const { books } = require("../Data/books.js").infoBooks;
+
 const orderby = require("../query/order.js");
+
 const routerBook = express.Router();
+
+// Middleware
+routerBook.use(express.json());
 
 routerBook.get("/", (req, res) => {
   if (req.query.orderby) {
@@ -63,6 +68,12 @@ routerBook.get("/author/:author", (req, res) => {
   }
 
   res.send(JSON.stringify(result));
+});
+
+routerBook.post("/", (req, res) => {
+  let newBook = req.body;
+  books.push(newBook);
+  res.send(JSON.stringify(books));
 });
 
 module.exports = routerBook;

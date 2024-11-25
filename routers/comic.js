@@ -2,7 +2,11 @@ const express = require("express");
 
 const { comics } = require("../Data/books.js").infoBooks;
 const orderby = require("../query/order.js");
+
 const routerComic = express.Router();
+
+// Middleware
+routerComic.use(express.json());
 
 routerComic.get("/", (req, res) => {
   if (req.query.orderby) {
