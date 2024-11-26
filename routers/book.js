@@ -23,7 +23,7 @@ routerBook.get("/title/:title", (req, res) => {
   );
 
   if (result.length === 0) {
-    return res.status(404).send(`No se encontro el libro ${title}.`);
+    return res.status(404).send(`No se encontró el libro ${title}.`);
   }
 
   if (req.query.orderby) {
@@ -73,6 +73,16 @@ routerBook.get("/author/:author", (req, res) => {
 routerBook.post("/", (req, res) => {
   let newBook = req.body;
   books.push(newBook);
+  res.send(JSON.stringify(books));
+});
+
+routerBook.delete('/:id', (req, res) => {
+  const id = req.params.id;
+  const index = books.findIndex(book => book.id  == id);
+
+  if (index >= 0 ) {
+    books.splice(index, 1);
+  }
   res.send(JSON.stringify(books));
 });
 

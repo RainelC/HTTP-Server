@@ -3,10 +3,14 @@ Content-Type: application/json
 
 {
      {
-      title: "Shadow of the wind",
+      title: "The Shadow of the Wind",
       author: "Carlos Ruiz Zafón",
       year: 2001,
       genre: "Thriller",
       available: true,
     }
 }
+
+###
+
+DELETE http://localhost:3000/api/library/books/1 HTTP/1.1

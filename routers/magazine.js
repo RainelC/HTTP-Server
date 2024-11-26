@@ -1,6 +1,7 @@
 const express = require("express");
 
 const { magazines } = require("../Data/books.js").infoBooks;
+
 const orderby = require("../query/order.js");
 
 const routerMagazine = express.Router();
@@ -19,7 +20,7 @@ routerMagazine.get("/title/:title", (req, res) => {
   );
 
   if (result.length === 0) {
-    return res.status(404).send(`No se encontro la revista ${title}.`);
+    return res.status(404).send(`No se encontró la revista ${title}.`);
   }
 
   if (req.query.orderby) {
@@ -63,6 +64,16 @@ routerMagazine.get("/issue/:issue", (req, res) => {
   }
 
   res.send(JSON.stringify(result));
+});
+
+routerMagazine.delete('/:id', (req, res) => {
+  const id = req.params.id;
+  const index = magazines.findIndex(magazine => magazine.id == id);
+  
+  if (index >= 0) {
+    magazines.splice(index, 1);
+  }
+  res.send(JSON.stringify(magazines));
 });
 
 module.exports = routerMagazine;

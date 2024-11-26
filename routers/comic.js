@@ -1,6 +1,7 @@
 const express = require("express");
 
 const { comics } = require("../Data/books.js").infoBooks;
+
 const orderby = require("../query/order.js");
 
 const routerComic = express.Router();
@@ -22,7 +23,7 @@ routerComic.get("/title/:title", (req, res) => {
   );
 
   if (result.length === 0) {
-    return res.status(404).send(`No se encontro el comics ${title}.`);
+    return res.status(404).send(`No se encontró el comics ${title}.`);
   }
 
   if (req.query.orderby) {
@@ -85,6 +86,16 @@ routerComic.get("/genre/:genre", (req, res) => {
   }
 
   res.send(JSON.stringify(result));
+});
+
+routerComic.delete('/:id', (req, res) => {
+  const id = req.params.id;
+  const index = comics.findIndex(comic => comic.id == id);
+
+  if (index >= 0) {
+    comics.splice(index, 1);
+  }
+  res.send(JSON.stringify(comics));
 });
 
 module.exports = routerComic;
