@@ -3,6 +3,8 @@ const express = require("express");
 const { magazines } = require("../Data/books.js").infoBooks;
 
 const orderby = require("../query/order.js");
+const validate = require("../validations/validationsData.js");
+const model = require("../Data/books.js").magazineModel;
 
 const routerMagazine = express.Router();
 
@@ -75,5 +77,26 @@ routerMagazine.delete('/:id', (req, res) => {
   }
   res.send(JSON.stringify(magazines));
 });
+
+routerMagazine.post("/", (req, res) => {
+  let newMagazine = req.body;
+  newMagazine.id = magazines.at(-1).id + 1;
+  result = validate.valiData(newMagazine, model);
+  if (result.error) {
+    return res
+      .status(result.status)
+      .send(`No se pudo crear, error: ${result.errorDes}`);
+  }
+
+  if (validate.valiDuplicate(newMagazine, magazines)) {
+    return res.status(409).send(`No se pudo crear la revista, porque ya existe`);
+  }
+  magazines.push(newMagazine);
+  res.send(JSON.stringify(magazines));
+});
+
+
+
+
 
 module.exports = routerMagazine;

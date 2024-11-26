@@ -166,4 +166,36 @@ let infoBooks = {
   ],
 };
 
-module.exports.infoBooks = infoBooks;
+let bookModel = {
+  id: "number",
+  title: "string",
+  author: "string",
+  year: "number",
+  genre: "string",
+  available: "boolean",
+};
+
+let comicsModel = {
+  id: "number",
+  title: "string",
+  author: "string",
+  year: "number",
+  illustrator: "string",
+  genre: "string",
+  available: "boolean",
+};
+
+let magazineModel = {
+  id: "number",
+  title: "string",
+  issue: "string",
+  genre: "string",
+  available: "boolean",
+};
+
+module.exports = {
+  infoBooks: infoBooks,
+  bookModel: bookModel,
+  comicsModel: comicsModel,
+  magazineModel: magazineModel,
+};

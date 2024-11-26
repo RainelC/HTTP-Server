@@ -1,8 +1,10 @@
 const express = require("express");
 
 const { books } = require("../Data/books.js").infoBooks;
+const model = require("../Data/books.js").bookModel;
 
 const orderby = require("../query/order.js");
+const validate = require("../validations/validationsData.js");
 
 const routerBook = express.Router();
 
@@ -72,6 +74,17 @@ routerBook.get("/author/:author", (req, res) => {
 
 routerBook.post("/", (req, res) => {
   let newBook = req.body;
+  newBook.id = books.at(-1).id + 1;
+  result = validate.valiData(newBook, model);
+  if (result.error) {
+    return res
+      .status(result.status)
+      .send(`No se pudo crear, error: ${result.errorDes}`);
+  }
+
+  if (validate.valiDuplicate(newBook, books)) {
+    return res.status(409).send(`No se pudo crear el libro, porque ya existe`);
+  }
   books.push(newBook);
   res.send(JSON.stringify(books));
 });
