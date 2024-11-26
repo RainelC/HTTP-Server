@@ -17,6 +17,16 @@ function validateData(data, model) {
       };
     }
 
+    for(let key in data){
+      if(!model.hasOwnProperty(key)){
+        return {
+          error: true,
+          status: 400,
+          errorDes: `La propiedad '${key}' no es requerida para este elemento.`,
+        };
+    }
+  }
+
     if (typeof data[key] === "string" && data[key].trim().length === 0) {
       return {
         error: true,
@@ -42,11 +52,9 @@ function validateData(data, model) {
 
 function validateDuplicate(data, alldata) {
   for (let idata of alldata) {
-    for (key in data) {
-      if (data[key] === idata[key]) {
+      if (data['title'] === idata['title']) {
         return true;
       }
-    }
   }
   return false;
 }

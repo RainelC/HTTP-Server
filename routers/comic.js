@@ -1,7 +1,10 @@
 const express = require("express");
 
 const { comics } = require("../Data/books.js").infoBooks;
+
 const orderby = require("../query/order.js");
+const model = require("../Data/books.js").comicsModel;
+const validate = require("../validations/validationsData.js");
 
 const routerComic = express.Router();
 
@@ -85,6 +88,23 @@ routerComic.get("/genre/:genre", (req, res) => {
   }
 
   res.send(JSON.stringify(result));
+});
+
+routerComic.post("/", (req, res) => {
+  let newComic = req.body;
+  newComic.id = comics.at(-1).id + 1;
+  result = validate.valiData(newComic, model);
+  if (result.error) {
+    return res
+      .status(result.status)
+      .send(`No se pudo crear, error: ${result.errorDes}`);
+  }
+
+  if (validate.valiDuplicate(newComic, comics)) {
+    return res.status(409).send(`No se pudo crear el comic, porque ya existe`);
+  }
+  comics.push(newComic);
+  res.send(JSON.stringify(comics));
 });
 
 module.exports = routerComic;
