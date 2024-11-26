@@ -97,6 +97,9 @@ routerComic.delete('/:id', (req, res) => {
   if (index >= 0) {
     comics.splice(index, 1);
   }
+
+});
+
 routerComic.post("/", (req, res) => {
   let newComic = req.body;
   newComic.id = comics.at(-1).id + 1;
