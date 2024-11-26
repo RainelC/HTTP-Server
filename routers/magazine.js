@@ -68,10 +68,10 @@ routerMagazine.get("/issue/:issue", (req, res) => {
   res.send(JSON.stringify(result));
 });
 
-routerMagazine.delete('/:id', (req, res) => {
+routerMagazine.delete("/:id", (req, res) => {
   const id = req.params.id;
-  const index = magazines.findIndex(magazine => magazine.id == id);
-  
+  const index = magazines.findIndex((magazine) => magazine.id == id);
+
   if (index >= 0) {
     magazines.splice(index, 1);
   }
@@ -89,24 +89,38 @@ routerMagazine.post("/", (req, res) => {
   }
 
   if (validate.valiDuplicate(newMagazine, magazines)) {
-    return res.status(409).send(`No se pudo crear la revista, porque ya existe`);
+    return res
+      .status(409)
+      .send(`No se pudo crear la revista, porque ya existe`);
   }
   magazines.push(newMagazine);
   res.send(JSON.stringify(magazines));
 });
 
+routerMagazine.put("/:id", (req, res) => {
+  const updateMagazine = req.body;
+  const id = req.params.id;
 
-routerMagazine.patch('/:id', (req, res) =>{
+  const index = magazines.findIndex((magazine) => magazine.id == id);
+
+  if (index >= 0) {
+    updateMagazine['id'] = magazines[index].id;
+    magazines[index] = updateMagazine;
+  }
+  res.send(JSON.stringify(magazines));
+});
+
+routerMagazine.patch("/:id", (req, res) => {
   const infoRefrescado = req.body;
   const id = req.params.id;
 
-  const indice = magazines.findIndex(books => magazines.id == id);
+  const indice = magazines.findIndex((magazine) => magazine.id == id);
 
-  if (indice >= 0){
+  if (indice >= 0) {
     const magazinesModificado = magazines[indice];
     Object.assign(magazinesModificado, infoRefrescado);
-    
-}});
-
+  }
+  res.send(JSON.stringify(magazines));
+});
 
 module.exports = routerMagazine;

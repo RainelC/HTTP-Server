@@ -1,11 +1,23 @@
-PATCH  http://localhost:3000/api/library/books/1 HTTP/1.1
-Content-Type: application/json
+# PUT   http://localhost:3000/api/library/comics/1 HTTP/1.1
+# Content-Type: application/json
 
-{
-    "title": "SpiderMan",
-    "author": "Jeph Loeb",
-    "year": 2002,
-    "genre": "Superhero",
-    "illustrator": "Tim Sale",
-    "available": true
-}
+# {
+#       "title": "Nacho Book",
+#       "author": "Luis Soto",
+#       "year": 2044,
+#       "genre": "Superhero",
+#       "illustrator": "Tim Sale",
+#       "available": false
+# }
+
+
+# PUT   http://localhost:3000/api/library/magazines/1 HTTP/1.1
+# Content-Type: application/json
+
+# {
+#       "id": 0,
+#       "title": "Nacho Book",
+#       "genre": "Superhero",
+#       "issue": "arroz",
+#       "available": false
+# }

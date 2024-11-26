@@ -117,6 +117,19 @@ routerComic.post("/", (req, res) => {
   res.send(JSON.stringify(comics));
 });
 
+routerComic.put("/:id", (req, res) => {
+  const updateComic = req.body;
+  const id = req.params.id;
+
+  const index = comics.findIndex((comic) => comic.id == id);
+
+  if (index >= 0) {
+    comics[index] = updateComic;
+  }
+  res.send(JSON.stringify(comics));
+});
+
+
 routerComic.patch('/:id', (req, res) =>{
   const infoRefrescado = req.body;
   const id = req.params.id;
