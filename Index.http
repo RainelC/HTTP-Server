@@ -1,11 +1,11 @@
-POST http://localhost:3000/api/library/books HTTP/1.1
+PATCH  http://localhost:3000/api/library/books/1 HTTP/1.1
 Content-Type: application/json
 
-
 {
-  "title": "Shadow of the wind",
-  "author": "Carlos Ruiz Zafón",
-  "year": 2001,
-  "genre": "Thriller",
-  "available": true
+    "title": "SpiderMan",
+    "author": "Jeph Loeb",
+    "year": 2002,
+    "genre": "Superhero",
+    "illustrator": "Tim Sale",
+    "available": true
 }

@@ -88,12 +88,37 @@ routerBook.post("/", (req, res) => {
   books.push(newBook);
   res.send(JSON.stringify(books));
 });
-
-routerBook.delete('/:id', (req, res) => {
+//////////////////////////////////////////////////////////////////////////////////////////////
+routerBook.put("/:id", (req, res) => {
+  const updateBook = req.body;
   const id = req.params.id;
-  const index = books.findIndex(book => book.id  == id);
 
-  if (index >= 0 ) {
+  const index = books.findIndex((book) => book.id == id);
+
+  if (index >= 0) {
+    books[index] = updateBook;
+  }
+  res.send(JSON.stringify(books));
+});
+
+routerBook.patch("/:id", (req, res) => {
+  const infoRefrescado = req.body;
+  const id = req.params.id;
+
+  const indice = books.findIndex((books) => books.id == id);
+
+  if (indice >= 0) {
+    const booksModificado = books[indice];
+    Object.assign(booksModificado, infoRefrescado);
+  }
+  res.send(JSON.stringify(books));
+});
+
+routerBook.delete("/:id", (req, res) => {
+  const id = req.params.id;
+  const index = books.findIndex((book) => book.id == id);
+
+  if (index >= 0) {
     books.splice(index, 1);
   }
   res.send(JSON.stringify(books));

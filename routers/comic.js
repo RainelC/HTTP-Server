@@ -90,14 +90,14 @@ routerComic.get("/genre/:genre", (req, res) => {
   res.send(JSON.stringify(result));
 });
 
-routerComic.delete('/:id', (req, res) => {
+routerComic.delete("/:id", (req, res) => {
   const id = req.params.id;
-  const index = comics.findIndex(comic => comic.id == id);
+  const index = comics.findIndex((comic) => comic.id == id);
 
   if (index >= 0) {
     comics.splice(index, 1);
   }
-
+  res.send(JSON.stringify(comics));
 });
 
 routerComic.post("/", (req, res) => {
@@ -114,6 +114,19 @@ routerComic.post("/", (req, res) => {
     return res.status(409).send(`No se pudo crear el comic, porque ya existe`);
   }
   comics.push(newComic);
+  res.send(JSON.stringify(comics));
+});
+
+routerComic.patch('/:id', (req, res) =>{
+  const infoRefrescado = req.body;
+  const id = req.params.id;
+
+  const indice = comics.findIndex(comics => comics.id == id);
+
+  if (indice >= 0){
+    const comicsModificado = comics[indice];
+    Object.assign(comicsModificado, infoRefrescado);
+  }
   res.send(JSON.stringify(comics));
 });
 

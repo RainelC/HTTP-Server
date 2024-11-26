@@ -96,7 +96,17 @@ routerMagazine.post("/", (req, res) => {
 });
 
 
+routerMagazine.patch('/:id', (req, res) =>{
+  const infoRefrescado = req.body;
+  const id = req.params.id;
 
+  const indice = magazines.findIndex(books => magazines.id == id);
+
+  if (indice >= 0){
+    const magazinesModificado = magazines[indice];
+    Object.assign(magazinesModificado, infoRefrescado);
+    
+}});
 
 
 module.exports = routerMagazine;
