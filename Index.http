@@ -1,23 +1,16 @@
-# PUT   http://localhost:3000/api/library/comics/1 HTTP/1.1
-# Content-Type: application/json
+PATCH    http://localhost:3000/api/library/comics/1 HTTP/1.1
+Content-Type: application/json
 
-# {
-#       "title": "Nacho Book",
-#       "author": "Luis Soto",
-#       "year": 2044,
-#       "genre": "Superhero",
-#       "illustrator": "Tim Sale",
-#       "available": false
-# }
+{
+      "title": "Nacho Book",
+      "author": "Luis Soto",
+}
 
 
-# PUT   http://localhost:3000/api/library/magazines/1 HTTP/1.1
-# Content-Type: application/json
+PATCH   http://localhost:3000/api/library/magazines/1 HTTP/1.1
+Content-Type: application/json
 
-# {
-#       "id": 0,
-#       "title": "Nacho Book",
-#       "genre": "Superhero",
-#       "issue": "arroz",
-#       "available": false
-# }
+{
+      "genre": "Superhero",
+      "issue": "arroz",
+}
